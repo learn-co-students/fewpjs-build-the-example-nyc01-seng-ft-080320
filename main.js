@@ -14,12 +14,19 @@ document.addEventListener("DOMContentLoaded", function(e){
             if(e.target.matches('.like-glyph')){
                 mimicServerCall('url')
                 .then(response => {
-                    e.target.innerText = FULL_HEART
-                    e.target.classList.add('activated-heart')
+                    if(e.target.innerText === EMPTY_HEART){
+                        e.target.innerText = FULL_HEART
+                        e.target.classList.add('activated-heart')
+                    } else if(e.target.innerText === FULL_HEART){
+                        e.target.innerText = EMPTY_HEART
+                        e.target.classList.remove('activated-heart')
+                    }
+                    
+                    
                 })
                 .catch(function(error){
                     const modal = document.getElementById('modal')
-                    modal.className = ''
+                    modal.classList.remove('hidden')
                     document.querySelector('#modal-message').innerText = error
                     setTimeout(function(){modal.classList.add('hidden'); }, 5000);
                 });
@@ -30,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 
     }
+
+  
        
         //when we click a like button we want to send a get request to the server???
         //if failure, 
