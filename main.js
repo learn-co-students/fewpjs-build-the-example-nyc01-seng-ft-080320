@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const addErrorBannerMsg = (msg) => {
+    let errorBanner = document.querySelector("#modal")
     errorBanner.innerText = msg; 
   }
 
