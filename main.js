@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const toggleHeart = (target) => {
     target.classList.toggle("activated-heart");
+    target.innerText === FULL_HEART ? target.innerText = EMPTY_HEART : target.innerText = FULL_HEART;
   }
 
   const toggleLikePrompt = (target) => {
