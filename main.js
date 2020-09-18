@@ -3,7 +3,31 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const errorModal = document.querySelector('#modal')
+errorModal.classList.add('hidden')
 
+document.addEventListener('click', e => {
+  if(e.target.parentNode.className === 'like') {
+    mimicServerCall()
+    .then(() => { changeHeart(e.target) })
+    .catch(() => {
+      errorModal.className = ''
+      errorModal.innerText = 'Error! Server cannot be reached! '
+      setTimeout(() => {
+        errorModal.className = 'hidden'
+      }, 5000)
+    })
+  }
+})
+function changeHeart(element) {
+  if(element.className === 'activated-heart') {
+    element.innerText = EMPTY_HEART
+    element.className = ''
+  } else {
+    element.innerText = FULL_HEART
+    element.className = 'activated-heart'
+  }
+}
 
 
 
