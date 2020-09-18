@@ -1,9 +1,53 @@
-// Defining text characters for the empty and full hearts for you to use later.
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
+const errorBanner = document.querySelector("#modal")
 
-// Your JavaScript code goes here!
+document.addEventListener("DOMContentLoaded", () => {
 
+  const clickHandler = () => {
+    document.addEventListener("click", (e) => {
+      if(e.target.matches(".like-glyph")) {
+        mimicServerCall()
+        .then(response => {
+          toggleHeart(e.target);
+          toggleLikePrompt(e.target);
+        })
+        .catch(data => {
+          addErrorBannerMsg(data);         
+          toggleErrorBanner();
+          setTimeout(toggleErrorBanner, 5000);
+        })
+      }
+    })
+    
+  }
+
+  const addErrorBannerMsg = (msg) => {
+    errorBanner.innerText = msg; 
+  }
+
+  const toggleHeart = (target) => {
+    target.classList.toggle("activated-heart");
+  }
+
+  const toggleLikePrompt = (target) => {
+    let parent = target.parentElement
+    if (parent.childNodes[0].textContent === "Like! ") {
+      parent.childNodes[0].textContent = "Unlike! ";
+    } else {
+      parent.childNodes[0].textContent = "Like! ";
+    }
+  }
+
+  // This is a solution, but because "hidden" doesn't actually say ".hidden", the test fails.
+  const toggleErrorBanner = () => {
+    errorBanner.classList.toggle("hidden")
+  }
+
+  // Added .hidden to modal div in index.html to handle test case. Thus have to comment-out the below function call
+  // toggleErrorBanner();
+  clickHandler();
+})
 
 
 
