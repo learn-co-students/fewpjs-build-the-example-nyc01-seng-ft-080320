@@ -1,6 +1,12 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
-const errorBanner = document.querySelector("#modal")
+
+const toggleErrorBanner = () => {
+  let errorBanner = document.querySelector("#modal")
+  errorBanner.classList.toggle("hidden");
+}
+
+toggleErrorBanner();
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -39,13 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // This is a solution, but because "hidden" doesn't actually say ".hidden", the test fails.
-  const toggleErrorBanner = () => {
-    errorBanner.classList.toggle("hidden")
-  }
-
-  // Added .hidden to modal div in index.html to handle test case. Thus have to comment-out the below function call
-  // toggleErrorBanner();
   clickHandler();
 })
 
