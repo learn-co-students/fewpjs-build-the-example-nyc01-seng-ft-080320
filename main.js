@@ -4,8 +4,33 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+let glyphStates = {
+  "♡": "♥",
+  "♥": "♡"
+};
 
+likeClassStates = {
+  "like-glyph" : "activated-heart",
+  "activated-heart" : "like-glyph"
+}
 
+errorModal = document.querySelector('#modal')
+
+document.addEventListener('click', e => {
+  if (e.target.parentNode.className === 'like') {
+    mimicServerCall()
+    .then(() => {
+      e.target.textContent = glyphStates[e.target.textContent];
+      e.target.className = likeClassStates[e.target.className];
+    })
+    .catch(() => {
+      errorModal.className = '';
+      setTimeout(() => {
+        errorModal.className = 'hidden'
+      }, 3000);
+    })
+  }
+})
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
